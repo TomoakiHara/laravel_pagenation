@@ -38,7 +38,7 @@ td {
   </tr>
   @endforeach
 </table>
-{{$authors->links()}}
+{{ $authors->links() }}
 @endsection
 </body>
 </html>
