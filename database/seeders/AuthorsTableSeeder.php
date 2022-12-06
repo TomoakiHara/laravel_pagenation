@@ -3,8 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Author;
 
-class AuthorsTabelSeeder extends Seeder
+class AuthorsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

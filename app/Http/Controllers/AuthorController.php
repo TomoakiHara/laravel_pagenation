@@ -10,8 +10,8 @@ class AuthorController extends Controller
 {
     public function index()
     {
-        $authors = Author::all();
-        return view('index', ['authors' => $authors]);
+    $authors = Author::simplePaginate(4);
+    return view('index', ['authors' => $authors]);
     }
 
     public function add()
@@ -65,6 +65,15 @@ class AuthorController extends Controller
         Author::find($request->id)->delete();
         return redirect('/');
     }
+
+    public function bind(Author $author)
+    {
+        $data = [
+        'author'=>$author,
+        ];
+        return view('author.binds', $data);
+    }
+
     public function get()
     {
         $text = [
@@ -81,9 +90,12 @@ class AuthorController extends Controller
         ];
     return view('middleware', $text);
     }
+
     Public function relate(Request $request)
     {
-        $authors = Author::all();
-        return view('author.index', ['authors' => $authors]);
+        $hasbooks = Author::has('book')->get();
+        $nobooks = Author::doesntHave('book')->get();
+        $param = ['hasbooks' => $hasbooks, 'nobooks' => $nobooks];
+        return view('author.index',$param);
     }
 }
